@@ -1,3 +1,9 @@
+function _enleverLeDelimiteurCustom(chaineDeNombres) {
+  const delimiteur = chaineDeNombres[2];
+  const chaineDeNombresSansDelimiteur = chaineDeNombres.slice(4);
+  return chaineDeNombresSansDelimiteur.replace(delimiteur, ',');
+}
+
 // Entrée : une chaine de caractères
 // Sortie : un entier
 function ajout(chaineDeNombres) {
@@ -7,13 +13,12 @@ function ajout(chaineDeNombres) {
     
     const ilYAUnDelimiteur = /^(\/\/)/.test(chaineDeNombres);
     if(ilYAUnDelimiteur) {
-        const delimiteur = chaineDeNombres[2];
-        const chaineDeNombresSansDelimiteur = chaineDeNombres.slice(4);
-        chaineDeNombres = chaineDeNombresSansDelimiteur.replace(delimiteur, ',');
-    } 
+      chaineDeNombres = _enleverLeDelimiteurCustom(chaineDeNombres);
+    }
+
     const tableauDeNombres = chaineDeNombres.split(/,|\n/);
 
-    return tableauDeNombres.reduce((valeur, accumulateur)=>{
+    return tableauDeNombres.reduce((valeur, accumulateur) => {
         return parseInt(valeur) + parseInt(accumulateur);
     }, 0);
 }
