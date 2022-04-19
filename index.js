@@ -1,15 +1,27 @@
-function _enleverLeDelimiteurCustom(chaineDeNombres) {
-  const indexDeLaFinDuDelimiteur = chaineDeNombres.indexOf(']');
-  const leDelimiteurEstMultiple = indexDeLaFinDuDelimiteur !== -1;
+function _remplacerLeDelimiteurParDesVirgules(chaineDeNombres, indexDeLaFinDuDelimiteur) {
+  const delimiteur = chaineDeNombres.substring(1, indexDeLaFinDuDelimiteur);
+  const chaineDeNombresSansCeDelimiteur = chaineDeNombres.substring(indexDeLaFinDuDelimiteur + 1);
+  return chaineDeNombresSansCeDelimiteur.replaceAll(delimiteur, ',');
+}
 
-  let delimiteur;
-  if(leDelimiteurEstMultiple) {
-    delimiteur = chaineDeNombres.substring(3, indexDeLaFinDuDelimiteur);
+function _enleverLesDelimiteursCustom(chaineDeNombres) {
+  chaineDeNombres = chaineDeNombres.replace(/\/\//, '');
+
+  let indexDeLaFinDuDelimiteur = chaineDeNombres.indexOf(']');
+  let ilYAUnDelimiteurMultiple = indexDeLaFinDuDelimiteur !== -1;
+
+  if(ilYAUnDelimiteurMultiple) {
+    while(ilYAUnDelimiteurMultiple) {
+      chaineDeNombres = _remplacerLeDelimiteurParDesVirgules(chaineDeNombres, indexDeLaFinDuDelimiteur);
+      indexDeLaFinDuDelimiteur = chaineDeNombres.indexOf(']');
+      ilYAUnDelimiteurMultiple = indexDeLaFinDuDelimiteur !== -1;
+    }
+    return chaineDeNombres;
   } else {
-    delimiteur = chaineDeNombres[2];
+    const delimiteur = chaineDeNombres[0];
+    const chaineDeNombresSansDelimiteur = chaineDeNombres.substring(2);
+    return chaineDeNombresSansDelimiteur.replace(delimiteur, ',');
   }
-  const chaineDeNombresSansDelimiteur = chaineDeNombres.replace(/\/\/\.*\n/, '');
-  return chaineDeNombresSansDelimiteur.replaceAll(delimiteur, ',');
 }
 
 function _verifierSilYADesNombresNegatifs(tableauDeNombres) {
@@ -38,7 +50,7 @@ function ajout(chaineDeNombres) {
     
     const ilYAUnDelimiteur = /^(\/\/)/.test(chaineDeNombres);
     if(ilYAUnDelimiteur) {
-      chaineDeNombres = _enleverLeDelimiteurCustom(chaineDeNombres);
+      chaineDeNombres = _enleverLesDelimiteursCustom(chaineDeNombres);
     }
 
     const tableauDeNombres = chaineDeNombres.split(/,|\n/);
@@ -85,10 +97,10 @@ console.log(ajout("2,1000,3")) // 5
 // Les délimiteurs peuvent être de n'importe quelle taille et suivent le format : "//[delimiter]\n"
 console.log(ajout("//[***]\n1***2***3")) // 6
 
-// // ETAPE 8
-// // Autoriser les délimiteurs multiples en suivant le pattern : "//[delim1][delim2]\n"
-// console.log(ajout("[*][%]\n1*2%3")) // 6
+// ETAPE 8
+// Autoriser les délimiteurs multiples en suivant le pattern : "//[delim1][delim2]\n"
+console.log(ajout("//[*][%]\n1*2%3")) // 6
 
 // // ETAPE 9
 // // Autoriser les délimiteurs mutliples de n'importe quelle taille
-// console.log(ajout("[**][---]\n1---2**3")) // 6
+console.log(ajout("//[**][---]\n1---2**4")) // 7
