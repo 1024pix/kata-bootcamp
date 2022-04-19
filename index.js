@@ -4,7 +4,10 @@ function ajout(chaineDeNombres) {
     if(chaineDeNombres.length === 0) {
       return 0;
     }
-    return parseInt(chaineDeNombres[0]) + parseInt(chaineDeNombres[2]);
+    const tableauDeNombres = chaineDeNombres.split(",");
+    return tableauDeNombres.reduce((valeur, accumulateur)=>{
+        return parseInt(valeur) + parseInt(accumulateur);
+    }, 0);
 }
 
 // ETAPE 1
@@ -15,7 +18,7 @@ console.log(ajout("1,2")); // 3
 
 // // ETAPE 2
 // // ajout() peut prendre plus que 2 nombres en entrée
-// console.log(ajout("1,2,1,6")); // 10
+console.log(ajout("1,2,1,6")); // 10
 
 // // ETAPE 3
 // // ajout() peut prendre 2 nombres séparés par des virgules OU des retours à la ligne (\n)
