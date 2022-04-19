@@ -4,6 +4,19 @@ function _enleverLeDelimiteurCustom(chaineDeNombres) {
   return chaineDeNombresSansDelimiteur.replace(delimiteur, ',');
 }
 
+function _verifierSilYADesNombresNegatifs(tableauDeNombres) {
+  const tableauDeNombresNegatifs = [];
+  tableauDeNombres.map((nombre) => {
+    if(parseInt(nombre) < 1) {
+      tableauDeNombresNegatifs.push(nombre);
+    }
+  })
+
+  if(tableauDeNombresNegatifs.length > 0) {
+    throw new Error("Les nombres négatifs ne sont pas autorisés : " + tableauDeNombresNegatifs);
+  }
+}
+
 // Entrée : une chaine de caractères
 // Sortie : un entier
 function ajout(chaineDeNombres) {
@@ -17,6 +30,7 @@ function ajout(chaineDeNombres) {
     }
 
     const tableauDeNombres = chaineDeNombres.split(/,|\n/);
+    _verifierSilYADesNombresNegatifs(tableauDeNombres);
 
     return tableauDeNombres.reduce((valeur, accumulateur) => {
         return parseInt(valeur) + parseInt(accumulateur);
@@ -48,7 +62,7 @@ console.log(ajout("//;\n1;2\n3")) // 6
 // // ETAPE 5
 // // ajout() doit jeter une exception "Les nombres négatifs ne sont pas autorisés : " quand un nombre négatif est passé en paramètres
 // // et afficher le / les nombres négatifs en question
-// console.log(ajout("-1,5\n-3")) // Les nombres négatifs ne sont pas autorisés : -1, -3 
+console.log(ajout("-1,5\n-3")) // Les nombres négatifs ne sont pas autorisés : -1, -3
 
 // // ETAPE 6
 // // Les nombres plus grands que 1000 (compris) doivent être ignorés
