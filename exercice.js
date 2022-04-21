@@ -8,6 +8,10 @@ function ajout(chaineDeNombres) {
         chaineDeNombres = chaineDeNombres.slice(2);
     }
     const tableauDeNombres = chaineDeNombres.split(new RegExp("[,\n"+delimiteur+"]")).filter(Boolean).map(value => parseInt(value));
+    const nombresNegatifs = tableauDeNombres.filter(value => value < 0);
+    if(nombresNegatifs.length > 0) {
+      return `Les nombres négatifs ne sont pas autorisés : ${nombresNegatifs}`;
+    }
   return tableauDeNombres.reduce((previous, current) => previous + current, 0);
 }
 
@@ -36,7 +40,7 @@ console.log(ajout("//;\n1;2")) // 3
 // ETAPE 5
 // ajout() doit jeter une exception "Les nombres négatifs ne sont pas autorisés : " quand un nombre négatif est passé en paramètres
 // et afficher le / les nombres négatifs en question
-// console.log(ajout("-1,5\n-3")) // Les nombres négatifs ne sont pas autorisés : -1, -3
+console.log(ajout("-1,5\n-3")) // Les nombres négatifs ne sont pas autorisés : -1, -3
 
 // ETAPE 6
 // Les nombres plus grands que 1000 (compris) doivent être ignorés
