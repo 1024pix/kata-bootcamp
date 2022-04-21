@@ -2,7 +2,7 @@
 // Sortie : un entier
 function ajout(chaineDeNombres) {
     if (chaineDeNombres.length === 0) return 0;
-    const tableauDeNombres = chaineDeNombres.split(',').map(value => parseInt(value));
+    const tableauDeNombres = chaineDeNombres.split(/[,\n]/).map(value => parseInt(value));
   return tableauDeNombres.reduce((previous, current) => previous + current, 0);
 }
 
@@ -15,12 +15,12 @@ console.log(ajout("1,2")); // 3
 
 // ETAPE 2
 // ajout() peut prendre plus que 2 nombres en entrée
-// console.log(ajout("1,2,1,6")); // 10
+console.log(ajout("1,2,1,6")); // 10
 
 // ETAPE 3
 // ajout() peut prendre 2 nombres séparés par des virgules OU des retours à la ligne (\n)
-// console.log(ajout("1\n2,3")) // 6
-// console.log(ajout("1,\n")) // ERROR
+console.log(ajout("1\n2,3")) // 6
+console.log(ajout("1,\n")) // ERROR
 
 // ETAPE 4
 // ajout() supporte différents délimiteurs
