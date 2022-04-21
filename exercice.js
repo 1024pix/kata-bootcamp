@@ -1,13 +1,13 @@
-// Entrée : une chaine de caractères
 // Sortie : un entier
+// Entrée : une chaine de caractères
 function ajout(chaineDeNombres) {
     let delimiteur;
     if (chaineDeNombres.length === 0) return 0;
     if (chaineDeNombres.startsWith('//')) {
         delimiteur = chaineDeNombres[2];
-        chaineDeNombres.slice(2);
+        chaineDeNombres = chaineDeNombres.slice(2);
     }
-    const tableauDeNombres = chaineDeNombres.split(new RegExp("[,\n"+delimiteur+"]")).map(value => parseInt(value));
+    const tableauDeNombres = chaineDeNombres.split(new RegExp("[,\n"+delimiteur+"]")).filter(Boolean).map(value => parseInt(value));
   return tableauDeNombres.reduce((previous, current) => previous + current, 0);
 }
 
@@ -25,7 +25,7 @@ console.log(ajout("1,2,1,6")); // 10
 // ETAPE 3
 // ajout() peut prendre 2 nombres séparés par des virgules OU des retours à la ligne (\n)
 console.log(ajout("1\n2,3")) // 6
-console.log(ajout("1,\n")) // ERROR
+console.log(ajout("1,\n")) // 1
 
 // ETAPE 4
 // ajout() supporte différents délimiteurs
