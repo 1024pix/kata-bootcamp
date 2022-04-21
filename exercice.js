@@ -1,8 +1,13 @@
 // Entrée : une chaine de caractères
 // Sortie : un entier
 function ajout(chaineDeNombres) {
+    let delimiteur;
     if (chaineDeNombres.length === 0) return 0;
-    const tableauDeNombres = chaineDeNombres.split(/[,\n]/).map(value => parseInt(value));
+    if (chaineDeNombres.startsWith('//')) {
+        delimiteur = chaineDeNombres[2];
+        chaineDeNombres.slice(2);
+    }
+    const tableauDeNombres = chaineDeNombres.split(new RegExp("[,\n"+delimiteur+"]")).map(value => parseInt(value));
   return tableauDeNombres.reduce((previous, current) => previous + current, 0);
 }
 
@@ -26,7 +31,7 @@ console.log(ajout("1,\n")) // ERROR
 // ajout() supporte différents délimiteurs
 // pour changer le délimiteur, la chaine en paramètre, suivra le pattern : "//[delimiter]\n[numbers…]"
 // tous les anciens scénarios doivent être supportés
-// console.log(ajout("//;\n1;2")) // 3
+console.log(ajout("//;\n1;2")) // 3
 
 // ETAPE 5
 // ajout() doit jeter une exception "Les nombres négatifs ne sont pas autorisés : " quand un nombre négatif est passé en paramètres
