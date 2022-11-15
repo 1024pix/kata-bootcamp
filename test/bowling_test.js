@@ -1,5 +1,7 @@
 const { expect } = require('chai');
 
-it('fails', function() {
-    expect(1).to.equal(2);
+let score = 9;
+
+it('should return a score of 9', function() {
+    expect(score).to.equal(9);
 });
