@@ -31,3 +31,11 @@ it("should return a zero globalScore", function () {
   const thowsList = [[0, 0]];
   expect(globalScore(thowsList)).to.equal(0);
 });
+
+it("should return a global score with a spare turn", function () {
+  const throwsList = [
+    [8, 2],
+    [3, 0],
+  ];
+  expect();
+});
