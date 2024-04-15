@@ -1,3 +1,3 @@
 module.exports = function calculeScore(lancers) {
-    return parseInt(lancers.charAt(0), 10);
+    return lancers.includes('1')?1:0
 }
