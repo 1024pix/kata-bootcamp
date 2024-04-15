@@ -47,3 +47,12 @@ test('3 lancer font tomber chacun 2 quilles, ce qui donne un score de 6 points',
     //then
     assert.strictEqual(score, 6);
 });
+
+test('on fait un spare mais pas de bonus, ce qui donne un score de 14 points', ()=> {
+    //given
+
+    //when
+    const score = calculeScore("00 0- 00 00 02 00 00 00 02 00");
+    //then
+    assert.strictEqual(score, 6);
+});
