@@ -1,3 +1,3 @@
 module.exports = function calculeScore(lancers) {
-    return lancers.includes('1')?1:0
+    return lancers.split('').filter((lancer) => lancer === "1").length;
 }
