@@ -1,3 +1,8 @@
 module.exports = function calculeScore(lancers) {
-    return lancers.split('').filter((lancer) => lancer === "1").length;
+    return lancers.split('').map((lancer) => {
+
+        return parseInt(lancer)
+    }).reduce((score,lancer) => {
+        return score + lancer;
+    }, 0)
 }

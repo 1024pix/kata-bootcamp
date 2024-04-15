@@ -30,7 +30,7 @@ test('le dixième lancer fait tomber une quille, donne le score 1', ()=> {
 });
 
 
-test('X lancer font tomber chacun 1 quille, ce qui donne un score de 3 points', ()=> {
+test('3 lancers font tomber chacun 1 quille, ce qui donne un score de 3 points', ()=> {
     //given
 
     //when
@@ -39,11 +39,11 @@ test('X lancer font tomber chacun 1 quille, ce qui donne un score de 3 points', 
     assert.strictEqual(score, 3);
 });
 
-// test('', ()=> {
-//     //given
-//
-//     //when
-//     const score = calculeScore("00 00 10 00 01 00 00 00 01 00");
-//     //then
-//     assert.strictEqual(score, 3);
-// });
+test('3 lancer font tomber chacun 2 quilles, ce qui donne un score de 6 points', ()=> {
+    //given
+
+    //when
+    const score = calculeScore("00 00 20 00 02 00 00 00 02 00");
+    //then
+    assert.strictEqual(score, 6);
+});
